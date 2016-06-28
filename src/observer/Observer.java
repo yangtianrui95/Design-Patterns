@@ -1,6 +1,8 @@
 package observer;
 
-// 这是一个观察者接口，定义一个更新的接口给那些在目标发生改变时通知的对象
+/**
+ * 所有观察者需实现此接口
+ */
 public interface Observer {
-
+	public void update(String msg);
 }
