@@ -30,3 +30,12 @@
 
 * 一个类定义了多种行为 , 并且这些行为在这个类的操作中以多个条件语句的形式出现。
  将相关的条件分支移入它们各自的Strategy类中以代替这些条件语句。
+
+ ### 策略模式的组成
+ 1. 环境类(Context):用一个ConcreteStrategy对象来配置。
+ 维护一个对Strategy对象的引用。可定义一个接口来让Strategy访问它的数据。
+
+ 2. 抽象策略类(Strategy):定义所有支持的算法的公共接口。
+ Context使用这个接口来调用某ConcreteStrategy定义的算法。
+
+ 3. 具体策略类(ConcreteStrategy):以Strategy接口实现某具体算法。
