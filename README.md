@@ -126,3 +126,95 @@ public class Zhaoyun {
 }
 
 ```
+----------
+## 4.代理模式
+>**为其他对象提供一种代理以控制对这个对象的访问。**
+>代理模式是常用的java设计模式，他的特征是代理类与委托类有同样的接口，
+代理类主要负责为委托类预处理消息、过滤消息、把消息转发给委托类，以及事后处理消息等。代理类与委托类之间通常会存在关联关系，
+一个代理类的对象与一个委托类的对象关联，代理类的对象本身并不真正实现服务，而是通过调用委托类的对象的相关方法，来提供特定的服务。
+
+### 使用场景:
+1. 远程代理（Remote Proxy）：为一个对象在不同的地址空间提供局部代理。
+2. 虚代理（Virtual Proxy）：根据需要创建开销很大的对象。
+3. 保护代理（Protection Proxy）：控制对原始对象的访问。保护代理用于对象应该有不同的访问权限的时候。
+4. 智能指引（Smart Reference）：取代了简单的指针，它在访问对象时执行一些附加操作。
+
+代理分为**静态代理**和**动态代理**,下面先以静态代理为例.
+
+UML类图
+![代理UML](http://img.blog.csdn.net/20160725223655514)
+
+### 定义代理类的规范,被代理类和代理类需实现此规范
+
+```
+/**
+ * Created by yangtianrui on 16-7-25.
+ * <p>
+ * 通过接口定义一个被代理类的规范
+ */
+interface Subject {
+    void request();     // do something...
+
+    Subject getProxy(); // 获取自身代理的对象
+}
+
+```
+### 实际的一个被代理类
+```
+/**
+ * Created by yangtianrui on 16-7-25.
+ * 被代理类
+ */
+public class RealSubject implements Subject {
+    @Override
+    public void request() {
+        System.out.println("RealSubject   --->   request() ");
+    }
+
+    @Override
+    public Subject getProxy() {
+        return null; // 没有代理任何对象
+    }
+}
+
+```
+
+### 代理类代理
+```
+/**
+ * Created by yangtianrui on 16-7-25.
+ * 代理类
+ */
+public class Proxy implements Subject {
+    private Subject mSubject; // 被代理类
+
+
+    /**
+     * 必须传递被代理的对象
+     */
+    public Proxy(Subject subject) {
+        this.mSubject = subject;
+    }
+
+    @Override
+    public void request() {
+        // 让代理类去执行
+        mSubject.request();
+    }
+
+    @Override
+    public Subject getProxy() {
+        return mSubject;
+    }
+}
+```
+
+### main函数
+```
+ public static void main(String[] args) {
+        // 代理一个RealSubject对象
+        Proxy proxy = new Proxy(new RealSubject());
+        proxy.request(); // 实际上时RealSubject对象的request()执行
+        // 输出:RealSubject   --->   request()
+    }
+```
