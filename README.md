@@ -218,3 +218,104 @@ public class Proxy implements Subject {
         // 输出:RealSubject   --->   request()
     }
 ```
+
+##　动态代理模式
+>当业务类很多时,使用静态代理需要写多个代理接口,这时可以通过反射实现动态代理.
+>只需要写一个动态代理类即可
+
+```
+
+/**
+ * Created by yangtianrui on 16-7-30.
+ * 方法代理类,基于反射实现动态代理
+ */
+public class MethodProxy {
+
+    private Class clazz;   // 对象所属的类
+    private Object target; // 目标对象
+    private Method method; // 目标方法
+    private Object[] params; // 参数数组
+
+    public MethodProxy(Object target, String methodName, Object... params) {
+        rebindTarget(target, methodName, params);
+    }
+
+    /**
+     * 设置目标对象与方法
+     */
+    private void rebindTarget(Object target, String methodName, Object... params) {
+        this.target = target;
+        this.clazz = target.getClass();
+        // 设置目标方法
+        rebindMethod(methodName, params);
+    }
+
+    /**
+     * 设置目标方法
+     */
+    private void rebindMethod(String methodName, Object... params) {
+        this.params = params;
+        int paramsLength = params.length;
+        Class[] paramsType = new Class[paramsLength];
+        // 获取每个参数的类型
+        for (int i = 0; i < paramsLength; i++) {
+            paramsType[i] = params[i].getClass();
+        }
+        try {
+            this.method = clazz.getMethod(methodName, paramsType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 动态调用已经绑定的方法
+     */
+    public void doMethod() {
+        try {
+            this.method.invoke(target, params);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+```
+
+### 业务类
+```
+/**
+ * Created by yangtianrui on 16-7-30.
+ * 测试
+ */
+public class Person {
+    public void say() {
+        System.out.println("Say SomeThing...");
+    }
+
+    public void love(String name) {
+        System.out.println("I love " + name);
+    }
+}
+
+```
+
+### 测试
+```
+public class Main {
+    public static void main(String[] args) {
+        Person person = new Person();
+        // 代理无参数的方法
+        MethodProxy methodProxy = new MethodProxy(person, "say");
+        methodProxy.doMethod();
+        // Say SomeThing...
+
+        // 代理有参数的方法
+        MethodProxy proxy2 = new MethodProxy(person, "love", "hehe");
+        proxy2.doMethod();
+        // I love hehe
+    }
+}
+
+```
+-----
