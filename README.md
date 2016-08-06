@@ -326,15 +326,20 @@ public class Main {
 这种模式创建了一个装饰类，用来包装原有的类，并在保持类方法签名完整性的前提下，提供了额外的功能。
 
 **意图：** 动态地给一个对象添加一些额外的职责。就增加功能来说，装饰器模式相比生成子类更为灵活。
+
 **主要解决：** 一般的，我们为了扩展一个类经常使用继承方式实现，由于继承为类引入静态特征，并且随着扩展功能的增多，子类会很膨胀。
+
 **何时使用：** 在不想增加很多子类的情况下扩展类。
+
 **如何解决：** 将具体功能职责划分，同时继承装饰者模式。
+
 **关键代码： **
+
 1. Component 类充当抽象角色，不应该具体实现。
 2. 修饰类引用和继承 Component 类，具体扩展类重写父类方法。
 
 ### 使用装饰器可以用来代替继承
-!()[http://www.runoob.com/wp-content/uploads/2014/08/decorator_pattern_uml_diagram.jpg]
+![](http://www.runoob.com/wp-content/uploads/2014/08/decorator_pattern_uml_diagram.jpg)
 
 ### 业务接口
 
@@ -408,7 +413,20 @@ public class RedBoundShape extends DecoratorShape {
 
 ```
 
+
 ### 测试
 ```
-
+public class Main {
+    public static void main(String[] args) {
+        Shape shape = new RedBoundShape(new Circle());
+        Shape shape2 = new RedBoundShape(new Reac());
+        shape.draw();
+        shape2.draw();
+        // 结果
+//        Shape : Circle
+//        This shape is Red Bound
+//        Shape : Reac
+//        This shape is Red Bound
+    }
+}
 ```

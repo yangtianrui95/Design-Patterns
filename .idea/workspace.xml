@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="20a05076-1007-45ad-a0fa-bb3d13673b1e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/decorator/Circle.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/decorator/DecoratorShape.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/decorator/Main.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/decorator/Reac.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/decorator/RedBoundShape.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/decorator/Shape.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="Design_Pattern.iws" />
@@ -31,12 +25,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="532">
-                <caret line="412" column="0" selection-start-line="412" selection-start-column="0" selection-end-line="412" selection-end-column="0" />
+              <first_editor relative-caret-position="348">
+                <caret line="333" column="29" selection-start-line="333" selection-start-column="29" selection-end-line="333" selection-end-column="29" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -69,7 +63,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RedBoundShape.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RedBoundShape.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/decorator/RedBoundShape.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="342">
@@ -85,8 +79,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/decorator/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="90">
+              <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -151,10 +145,10 @@
         <option value="$PROJECT_DIR$/src/decorator/Circle.java" />
         <option value="$PROJECT_DIR$/src/decorator/Reac.java" />
         <option value="$PROJECT_DIR$/src/decorator/DecoratorShape.java" />
-        <option value="$PROJECT_DIR$/src/decorator/RedBoundShape.java" />
         <option value="$PROJECT_DIR$/src/decorator/Shape.java" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/decorator/Main.java" />
+        <option value="$PROJECT_DIR$/src/decorator/RedBoundShape.java" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -793,7 +787,7 @@
       <workItem from="1469452286981" duration="3921000" />
       <workItem from="1469848907803" duration="5502000" />
       <workItem from="1469953387397" duration="49000" />
-      <workItem from="1470498080281" duration="2604000" />
+      <workItem from="1470498080281" duration="3031000" />
     </task>
     <task id="LOCAL-00001" summary="代理模式">
       <created>1469457585561</created>
@@ -813,7 +807,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12241000" />
+    <option name="totallyTimeSpent" value="12668000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="43" y="792" width="1323" height="744" extended-state="6" />
@@ -1107,6 +1101,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/decorator/RedBoundShape.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="e#168#169#0" expanded="true" />
+            <element signature="e#196#197#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/decorator/Shape.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -1115,11 +1120,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/decorator/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="532">
-            <caret line="412" column="0" selection-start-line="412" selection-start-column="0" selection-end-line="412" selection-end-column="0" />
+          <first_editor relative-caret-position="348">
+            <caret line="333" column="29" selection-start-line="333" selection-start-column="29" selection-end-line="333" selection-end-column="29" />
             <folding />
           </first_editor>
           <second_editor />
@@ -1129,25 +1142,6 @@
         <state relative-caret-position="320">
           <caret line="245" column="26" selection-start-line="245" selection-start-column="26" selection-end-line="245" selection-end-column="26" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/decorator/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/decorator/RedBoundShape.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding>
-            <element signature="e#168#169#0" expanded="true" />
-            <element signature="e#196#197#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
