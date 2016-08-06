@@ -319,3 +319,96 @@ public class Main {
 
 ```
 -----
+
+## 装饰器模式
+>装饰器模式（Decorator Pattern）允许向一个现有的对象添加新的功能，
+同时又不改变其结构。这种类型的设计模式属于结构型模式，它是作为现有的类的一个包装。
+这种模式创建了一个装饰类，用来包装原有的类，并在保持类方法签名完整性的前提下，提供了额外的功能。
+
+**意图：** 动态地给一个对象添加一些额外的职责。就增加功能来说，装饰器模式相比生成子类更为灵活。
+**主要解决：** 一般的，我们为了扩展一个类经常使用继承方式实现，由于继承为类引入静态特征，并且随着扩展功能的增多，子类会很膨胀。
+**何时使用：** 在不想增加很多子类的情况下扩展类。
+**如何解决：** 将具体功能职责划分，同时继承装饰者模式。
+**关键代码： **
+1. Component 类充当抽象角色，不应该具体实现。
+2. 修饰类引用和继承 Component 类，具体扩展类重写父类方法。
+
+### 使用装饰器可以用来代替继承
+!()[http://www.runoob.com/wp-content/uploads/2014/08/decorator_pattern_uml_diagram.jpg]
+
+### 业务接口
+
+```
+ * Created by yangtianrui on 16-8-7.
+ * 代表一个业务
+ */
+interface Shape {
+
+    void draw();
+}
+
+```
+
+### 具体业务类
+```
+/**
+ * Created by yangtianrui on 16-8-7.
+ * 具体业务类
+ */
+public class Circle implements Shape {
+
+    @Override
+    public void draw() {
+        System.out.println("Shape : Circle");
+    }
+}
+
+```
+
+### 抽象装饰器
+```
+/**
+ * Created by yangtianrui on 16-8-7.
+ * 抽象业务的装饰器类
+ */
+public abstract class DecoratorShape implements Shape {
+    private Shape mShape; // 具体的业务对象
+
+    public DecoratorShape(Shape shape) {
+        mShape = shape;
+    }
+
+    @Override
+    public void draw() {
+        mShape.draw();
+    }
+}
+
+```
+
+### 实体装饰器对实体业务进行封装
+```
+/**
+ * Created by yangtianrui on 16-8-7.
+ * 具体业务的装饰器类
+ */
+public class RedBoundShape extends DecoratorShape {
+    public RedBoundShape(Shape shape) {
+        super(shape);
+    }
+
+
+    @Override
+    public void draw() {
+        super.draw();
+        // 其他业务.....
+        System.out.println("This shape is Red Bound");
+    }
+}
+
+```
+
+### 测试
+```
+
+```
