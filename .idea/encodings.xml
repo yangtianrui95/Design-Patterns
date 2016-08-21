@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/decorator_example/ArmEuqip.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/decorator_example/BlueGemDecorator.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/decorator_example/Main.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/decorator_example/RedGemDecorator.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/decorator_example/RingEquip.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/observer/Main.java" charset="GB2312" />
   </component>
 </project>
