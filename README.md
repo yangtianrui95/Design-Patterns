@@ -1,5 +1,5 @@
-# Java--Design_Pattern
-常用的Java设计模式
+# Design-Patterns
+常用的Java设计模式,会定期更新
 
 ## 1. 简单工厂模式
 
