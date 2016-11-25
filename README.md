@@ -430,3 +430,179 @@ public class Main {
     }
 }
 ```
+
+## 状态模式
+> **状态模式**：允许一个对象在其内部状态改变时改变它的行为。对象看起来似乎修改了它的类。
+
+在很多情况下，一个对象的行为取决于一个或多个**动态变化**的属性，这样的属性叫做**状态**，这样的对象叫做有状态的(stateful)对象，这样的对象状态是从事先定义好的一系列值中取出的。**当一个这样的对象与外部事件产生互动时，其内部状态就会改变，从而使得系统的行为也随之发生变化。**
+
+### 在下面的两种情况下均可使用**State**模式:
+1.  一个对象的行为取决于它的状态, 并且它必须在**运行**时刻根据状态改变它的行为。
+
+2.  代码中包含大量与对象状态有关的条件语句:**一个操作中含有庞大的多分支的条件（if else或switch case)语句，且这些分支依赖于该对象的状态。这个状态通常用一个或多个枚举常量表示。**通常 , 有多个操作包含这一相同的条件结构。**State模式将每一个条件分支放入一个独立的类中。这使得你可以根据对象自身的情况将对象的状态作为一个对象，这一对象可以不依赖于其他对象而独立变化。**
+![这里写图片描述](http://my.csdn.net/uploads/201205/11/1336719144_5496.jpg)
+
+## 模式的组成
+* 环境类（Context）:  定义客户感兴趣的接口。维护一个ConcreteState子类的实例，这个实例定义当前状态。
+
+* 抽象状态类（State）:  定义一个接口以封装与Context的一个特定状态相关的行为。
+
+* 具体状态类（ConcreteState）:  每一子类实现一个与Context的一个状态相关的行为。
+
+
+## State模式有下面一些好处:
+
+###状态模式的优点：
+1.  它将与特定状态相关的行为局部化，并且将不同状态的行为分割开来: State模式将所有与一个特定的状态相关的行为都放入一个对象中。因为所有与状态相关的代码都存在于某一个`State`子类中, 所以通过定义新的子类可以很容易的增加新的状态和转换。另一个方法是使用数据值定义内部状态并且让 `Context`操作来显式地检查这些数据。但这样将会使整个`Context`的实现中遍布看起来很相似的条件if else语句或switch case语句。增加一个新的状态可能需要改变若干个操作, 这就使得维护变得复杂了。State模式避免了这个问题, 但可能会引入另一个问题, 因为该模式将不同状态的行为分布在多个State子类中。这就增加了子类的数目，相对于单个类的实现来说不够紧凑。但是如果有许多状态时这样的分布实际上更好一些, 否则需要使用巨大的条件语句。正如很长的过程一样，巨大的条件语句是不受欢迎的。它们形成一大整块并且使得代码不够清晰，这又使得它们难以修改和扩展。 State模式提供了一个更好的方法来组织与特定状态相关的代码。决定状态转移的逻辑不在单块的 i f或s w i t c h语句中, 而是分布在State子类之间。将每一个状态转换和动作封装到一个类中，就把着眼点从执行状态提高到整个对象的状态。这将使代码结构化并使其意图更加清晰。
+
+2. 它使得状态转换显式化: 当一个对象仅以内部数据值来定义当前状态时 , 其状态仅表现为对一些变量的赋值，这不够明确。为不同的状态引入独立的对象使得转换变得更加明确。而且, State对象可保证Context不会发生内部状态不一致的情况，因为从 Context的角度看，状态转换是原子的—只需重新绑定一个变量(即Context的State对象变量)，而无需为多个变量赋值
+
+3. State对象可被共享 如果State对象没有实例变量—即它们表示的状态完全以它们的类型来编码—那么各Context对象可以共享一个State对象。当状态以这种方式被共享时, 它们必然是没有内部状态, 只有行为的轻量级对象。
+
+### 状态模式的缺点:
+1.  状态模式的使用必然会增加系统类和对象的个数。
+
+2. 状态模式的结构与实现都较为复杂，如果使用不当将导致程序结构和代码的混乱。
+
+###模式总结
+1. 状态模式允许一个对象基于内部状态而拥有不同的行为。
+2. Context会将行为委托给当前状态对象。
+3. 状态模式对“开闭原则”支持不是很好。
+
+### 实例: 使用宾馆管理模拟状态对象
+#### 通用状态类
+
+```
+/**
+ * Created by yangtianrui on 16-11-25.
+ * 表示宾馆管理的三个状态
+ */
+
+public interface State {
+
+    // 进入宾馆
+    void checkInState();
+
+    // 有人入住
+    void usingState();
+
+    // 离开宾馆
+    void checkoutState();
+
+}
+
+```
+
+#### 具体状态类
+
+```
+/**
+ * Created by yangtianrui on 16-11-25.
+ * 尚未预订的状态
+ */
+public class FreeState implements State {
+
+    @Override
+    public void checkInState() {
+        System.out.println("尚未预订");
+    }
+
+    @Override
+    public void usingState() {
+        System.out.println("尚未预订");
+    }
+
+    @Override
+    public void checkoutState() {
+        System.out.println("房间还未时使用");
+    }
+}
+
+```
+
+```
+/**
+ * Created by yangtianrui on 16-11-25.
+ * 已经有人预订的状态
+ */
+public class BookState implements State {
+    @Override
+    public void checkInState() {
+        System.out.println("已经有人预订了");
+    }
+
+    @Override
+    public void usingState() {
+        System.out.println("开始使用");
+    }
+
+    @Override
+    public void checkoutState() {
+        System.out.println("退房成功");
+    }
+}
+
+```
+#### Context对象,酒店管理类
+
+```
+/**
+ * Created by yangtianrui on 16-11-25.
+ * Context for State interface.
+ */
+public class HotelManager {
+    private State mCurState = new FreeState(); // 当前的状态值
+
+    // 预订一个宾馆,设置对应的状态值
+    // 此处为改变状态对象,具体操作委托给状态对象执行
+    public void bookHotel() {
+        mCurState = new BookState();
+        mCurState.usingState();
+    }
+
+    public void checkInHotel() {
+        mCurState.checkInState();
+    }
+
+    public void checkoutHotel() {
+        mCurState.checkoutState();
+    }
+
+
+    public State getState() {
+        return mCurState;
+    }
+
+
+    public void setState(State mCurState) {
+        this.mCurState = mCurState;
+    }
+
+
+}
+```
+
+#### 测试
+
+```
+public class Main {
+
+    public static void main(String[] args) {
+        HotelManager manager = new HotelManager();
+        // 此处为预订
+        manager.checkInHotel();
+
+        // 预订宾馆, Manager 会切换不同的State对象
+        manager.bookHotel();
+
+        // 再次预订宾馆
+        manager.checkInHotel();
+
+        // 结果:
+        // 尚未预订
+        // 开始使用
+        // 已经有人预订了
+    }
+}
+
+```
