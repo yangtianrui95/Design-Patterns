@@ -606,3 +606,117 @@ public class Main {
 }
 
 ```
+
+> 桥接（Bridge）是用于把抽象化与实现化解耦，使得二者可以独立变化。这种类型的设计模式属于**结构型模式**，它通过提供抽象化和实现化之间的桥接结构，来实现二者的解耦。
+**这种模式涉及到一个作为桥接的接口，使得实体类的功能独立于接口实现类。这两种类型的类可被结构化改变而互不影响。**
+
+
+###**桥接模式**: 将抽象与实现分离,使他们能够独立的进行变化.
+
+我们通过下面的实例来演示桥接模式（Bridge Pattern）的用法。其中，可以使用相同的抽象类方法但是不同的桥接实现类，来画出不同颜色的圆。
+
+####**优点**：
+ 1. 抽象和实现的分离。
+ 2. 优秀的扩展能力。
+ 3.   实现细节对客户透明。
+
+####**缺点**：
+桥接模式的引入会增加系统的理解与设计难度，由于聚合关联关系建立在抽象层，要求开发者针对抽象进行设计与编程。
+
+####**使用场景**：
+ 1. 如果一个系统需要在构件的抽象化角色和具体化角色之间增加更多的灵活性，避免在两个层次之间建立静态的继承联系，通过桥接模式可以使它们在抽象层建立一个关联关系。
+ 2.  对于那些不希望使用继承或因为多层次继承导致系统类的个数急剧增加的系统，桥接模式尤为适用。
+ 3.   一个类存在两个独立变化的维度，且这两个维度都需要进行扩展。
+
+**注意事项**：对于两个独立变化的维度，使用桥接模式再适合不过了。
+
+### 桥接模式的应用
+#### 进行桥接的类
+![这里写图片描述](http://img.blog.csdn.net/20161128141936009)
+```
+/**
+ * Created by yangtianrui on 16-11-28.
+ * 这个类既包含抽象又包含具体实现,使用DisplayImpl对象进行桥接,实现解偶
+ */
+public class Display {
+    // 使用桥接,将抽象与具体实现解偶
+    private DisplayImpl mDisplay = new ContreteDisplay();
+
+    public void open() {
+        System.out.println("Display #open()");
+        mDisplay.rawOpen();
+    }
+
+    public void print() {
+        System.out.println("Display #print()");
+        mDisplay.rawPrint();
+    }
+
+    public void close() {
+        System.out.println("Display #close()");
+        mDisplay.rawClose();
+    }
+
+}
+```
+
+##### 具体实现的类
+
+```
+/**
+ * Created by yangtianrui on 16-11-28.
+ * 具体实现类的接口
+ */
+public interface DisplayImpl {
+    void rawOpen();
+
+    void rawPrint();
+
+    void rawClose();
+}
+
+/**
+ * Created by yangtianrui on 16-11-28.
+ * 具体实现类
+ */
+public class ContreteDisplay implements DisplayImpl {
+    @Override
+    public void rawOpen() {
+        System.out.println("ContreteDisplay #rawOpen()");
+    }
+
+    @Override
+    public void rawPrint() {
+        System.out.println("ContreteDisplay #rawPrint()");
+    }
+
+    @Override
+    public void rawClose() {
+        System.out.println("ContreteDisplay #rawClose()");
+    }
+}
+
+```
+
+测试类
+
+```
+public class Main {
+
+    public static void main(String[] args) {
+        Display display = new Display();
+
+        // 这里调用impl具体对象的实现
+        display.open();
+        display.print();
+        display.close();
+//        Display #open()
+//        ContreteDisplay #rawOpen()
+//        Display #print()
+//        ContreteDisplay #rawPrint()
+//        Display #close()
+//        ContreteDisplay #rawClose()
+    }
+}
+
+```
