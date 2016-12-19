@@ -720,3 +720,236 @@ public class Main {
 }
 
 ```
+## 职责链模式
+
+>使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。
+
+### 适用场景:
+
+1. 有多个的对象可以处理一个请求，**哪个对象处理该请求运行时刻自动确定**；
+
+2. 在不明确指定接收者的情况下，向多个对象中的一个提交一个请求；
+
+3. **处理一个请求的对象集合应被动态指定。**
+
+### 通用类图
+![这里写图片描述](http://img.blog.csdn.net/20161219235658522?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveTg3NDk2MTUyNA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+### 职责链模式说明
+> 避免请求发送者与接收者耦合在一起，让多个对象都有可能接收请求，将这些对象连接成一条链，并且沿着这条链传递请求，直到有对象处理它为止。
+
+1. 客户端发送一个请求，有多个对象都有机会来处理这个请求，但客户端不知道究竟谁来处理。
+
+2. 客户端只知道他提交请求的第一个对象，从第一个对象开始处理，整个职责链中的对象要么处理请求，要么转发给下一个接受者。
+在标准的职责链模式中，只要有对象处理了请求，这个请求就到此为止，不再被传递和处理了。
+
+3. 在职责链模式中，请求不一定会被处理，因为可能没有合适的处理者。请求在职责链中从头到尾，每个处理对象都判断不属于自己处理，最后请求就没有对象来处理。
+
+4. 在实际开发中，经常会遇到把职责链稍稍变形的用法。**一个请求在职责链中传递，每个对象处理完后不是停止，而是继续向下传递请求，当请求通过所有对象处理后，功能也就处理完成了，这样的职责链称为功能链。**
+
+### 场景分析
+
+在大学里面当班干部，时常要向上级申请各方面的东西。譬如申请全班外出秋游，普通同学将申请表交给班长，班长签字之后交给辅导员，辅导员批准之后上交到主任办公室…就是这样，一个请求（这里是一份申请表）有时候需要经过好几个级别的处理者（这里是辅导员、主任）的审查才能够最终被确定可行与否。
+
+在这里表现出来的是一个职责链，**即不同的处理者对同一个请求可能担负着不同的处理方式、权限**，但是我们希望这个请求必须到达最终拍板的处理者（否则秋游就没戏了）。这种关系就很适合使用职责链模式了。
+
+![这里写图片描述](http://img.blog.csdn.net/20161219235952808?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveTg3NDk2MTUyNA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+
+### 代码实现
+设置处理级别
+
+```
+/**
+ * Created by yangtianrui on 16-12-20.
+ * 处理级别
+ */
+public interface Level {
+    int LEVEL1 = 1;
+    int LEVEL2 = 2;
+    int LEVEL3 = 3;
+}
+
+```
+封装各种请求
+
+```
+
+/**
+ * Created by yangtianrui on 16-12-20.
+ * 模拟各种请求
+ */
+public abstract class BaseRequest {
+
+    private String content; // 要传递修改的内容
+
+    public BaseRequest(String content) {
+        this.content = content;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    // 根据级别进行判断
+    abstract public int getLevel();
+}
+
+public class Request1 extends BaseRequest {
+
+
+    public Request1(String content) {
+        super(content);
+    }
+
+    @Override
+    public int getLevel() {
+        return Level.LEVEL1;
+    }
+}
+
+
+public class Request2 extends BaseRequest {
+
+
+    public Request2(String content) {
+        super(content);
+    }
+
+    @Override
+    public int getLevel() {
+        return Level.LEVEL2;
+    }
+}
+
+
+public class Request3 extends BaseRequest {
+
+
+    public Request3(String content) {
+        super(content);
+    }
+
+    @Override
+    public int getLevel() {
+        return Level.LEVEL3;
+    }
+}
+
+```
+
+请求处理类
+
+```
+
+/**
+ * Created by yangtianrui on 16-12-20.
+ * 请求处理类
+ */
+public abstract class AbsHandler {
+    // 指向职责链的下一个引用
+    private AbsHandler mNextHandler;
+
+    public final void handleRequest(BaseRequest request) {
+        // 可以处理
+        if (getHandleLevel() >= request.getLevel()) {
+            // 在当前处理
+            handle(request);
+        } else {
+            System.out.println(getClass().getSimpleName() + " can 't handle this request!");
+            // 无法处理时
+            // 向下传递处理
+            mNextHandler.handleRequest(request);
+        }
+    }
+
+    public void setNextHandler(AbsHandler nextHandler) {
+        mNextHandler = nextHandler;
+    }
+
+    abstract public int getHandleLevel();
+
+    abstract protected void handle(BaseRequest request);
+}
+
+```
+
+具体的一些处理
+
+```
+public class ContreteHandler1 extends AbsHandler {
+    @Override
+    public int getHandleLevel() {
+        return Level.LEVEL2;
+    }
+
+    @Override
+    public void handle(BaseRequest request) {
+        System.out.println("ContreteHandler1 #handle()");
+    }
+}
+
+
+public class ContreteHandler2 extends AbsHandler {
+    @Override
+    public int getHandleLevel() {
+        return Level.LEVEL3;
+    }
+
+    @Override
+    public void handle(BaseRequest request) {
+        String content = request.getContent();
+    }
+}
+
+```
+
+代码测试
+
+```
+public class Main {
+
+    public static void main(String[] args) {
+        AbsHandler handler = new ContreteHandler1();
+        AbsHandler handler2 = new ContreteHandler2();
+
+        Request1 request1 = new Request1("request1 ");
+        Request2 request2 = new Request2("request2 ");
+        Request3 request3 = new Request3("request3 ");
+
+        handler.setNextHandler(handler2);
+
+        handler.handleRequest(request1);
+        handler.handleRequest(request2);
+        // 让下级进行处理
+        handler.handleRequest(request3);
+
+        /*
+            结果
+            ContreteHandler1 #handle()
+            ContreteHandler1 #handle()
+            ContreteHandler1 can 't handle this request!
+            ContreteHandler2 #handle()
+        */
+    }
+}
+
+```
+
+### 职责链模式优缺点
+
+####请求者和接收者松耦合
+在职责链模式中，请求者并不知道接收者是谁，也不知道具体如何处理，请求者只是负责向职责链发送请求就可以了。而每个职责对象也不用管请求者或者是其他的职责对象，只负责处理自己的部分，其他的就交给其他的职责对象去处理。也就是说，请求者和接受者是完全解耦的。
+
+####动态组合职责
+职责链模式会把功能处理分散到单独的职责对象中，然后再使用的时候，可以动态组合职责形成职责链，从而可以灵活地给对象分配职责，也可以灵活地实现和改变对象的职责。
+
+#### 产生很多细粒度对象
+职责链模式会把功能处理分散到单独的职责对象中，也就是每个职责对象只处理一个方面的功能，要把整个业务处理完，需要很多职责对象的组合，这样会产生大量的细粒度职责对象。
+
+#### 不一定能被处理
+职责链模式的每个职责对象只负责自己处理的那一部分，因此可能会出现某个请求把整个链传递完了都没有职责对象处理它。这就需要使用职责链模式的时候，需要提供默认的处理，并且注意构造的链的有效性。
