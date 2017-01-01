@@ -953,3 +953,254 @@ public class Main {
 
 #### 不一定能被处理
 职责链模式的每个职责对象只负责自己处理的那一部分，因此可能会出现某个请求把整个链传递完了都没有职责对象处理它。这就需要使用职责链模式的时候，需要提供默认的处理，并且注意构造的链的有效性。
+
+-----
+## 基于InvocationHandler创建动态代理
+
+> 动态代理是代理模式的一种,而代理模式又是一种非常有用的模式之一.下面介绍下通过InvocatonHandler实现动态代理
+
+## InvocationHandler接口
+
+InvocationHandler 是代理实例的调用处理程序 实现的接口。
+每个代理实例都具有一个关联的调用处理程序。对代理实例调用方法时，将对方法调用进行编码并将其指派到它的调用处理程序的 invoke 方法。
+
+### 关键方法
+Object invoke(Object proxy,Method method,Object[] args) throws Throwable
+
+在代理实例上处理方法调用并返回结果。在与方法关联的代理实例上调用方法时，将在调用处理程序上调用此方法。
+
+####参数：
+**proxy** - 在其上调用方法的代理实例
+
+**method** - 对应于在代理实例上调用的接口方法的 Method 实例。Method 对象的声明类将是在其中声明方法的接口，该接口可以是代理类赖以继承方法的代理接口的超接口。
+
+**args** - 包含传入代理实例上方法调用的参数值的对象数组，如果接口方法不使用参数，则为 null。基本类型的参数被包装在适当基本包装器类（如 java.lang.Integer 或 java.lang.Boolean）的实例中。
+
+####返回：
+从代理实例的方法调用返回的值。如果接口方法的声明返回类型是基本类型，则此方法返回的值一定是相应基本包装对象类的实例；否则，它一定是可分配到声明返回类型的类型。如果此方法返回的值为 null 并且接口方法的返回类型是基本类型，则代理实例上的方法调用将抛出 NullPointerException。否则，如果此方法返回的值与上述接口方法的声明返回类型不兼容，则代理实例上的方法调用将抛出 ClassCastException。
+
+####抛出：
+Throwable - 从代理实例上的方法调用抛出的异常。该异常的类型必须可以分配到在接口方法的 throws 子句中声明的任一异常类型或未经检查的异常类型 java.lang.RuntimeException 或 java.lang.Error。如果此方法抛出经过检查的异常，该异常不可分配到在接口方法的 throws 子句中声明的任一异常类型，代理实例的方法调用将抛出包含此方法曾抛出的异常的 UndeclaredThrowableException。
+
+
+## 场景分析
+
+现在需要对一个`setHotRating()` 方法进行保护,所以提供两个代理类,一个能够访问,另一个不能访问.
+
+### 定义通用接口
+```
+
+/**
+ * Created by yangtianrui on 16-12-31.
+ */
+public interface IPersonBean {
+
+    String getName();
+
+    String getGender();
+
+    int getHotRating();
+
+    void setName(String name);
+
+    void setGender(String name);
+
+    // 将使用代理限制这个方法的访问
+    void setHotRating(int rating);
+
+}
+
+```
+### 接口实现
+
+```
+/**
+ * Created by yangtianrui on 16-12-31.
+ */
+public class PersonImpl implements IPersonBean {
+
+    private String name;
+    private String gender;
+    private int hotRating;
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getGender() {
+        return gender;
+    }
+
+    @Override
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    @Override
+    public int getHotRating() {
+        return hotRating;
+    }
+
+    @Override
+    public void setHotRating(int hotRating) {
+        this.hotRating = hotRating;
+    }
+}
+
+```
+
+对其中的setHotRating提供保护
+
+### 实现Handler,用于创建动态代理
+
+```
+
+/**
+ * Created by yangtianrui on 16-12-31.
+ * 使用JDK提供的方法实现动态代理
+ * 对真实调用对象提供保护
+ */
+public class ProtectInvocationHandler implements InvocationHandler {
+    private IPersonBean person;
+
+    public ProtectInvocationHandler(IPersonBean person) {
+        this.person = person;
+    }
+
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        try {
+            // 执行所有getter
+            if (method.getName().startsWith("get")) {
+                method.invoke(person, args);
+                // 对setHotRating进行权限管理
+            } else if (method.getName().equals("setHotRating")) {
+                System.out.println("yon don't have permission to invoke this method!!");
+            } else if (method.getName().startsWith("set")) {
+                method.invoke(person, args);
+            }
+        } catch (InvocationTargetException e) {
+            // 真正的主题抛出异常,在此处进行处理
+            e.printStackTrace();
+        }
+        return null;
+    }
+}
+
+```
+
+创建不提供保护的代理
+
+```
+
+/**
+ * Created by yangtianrui on 16-12-31.
+ * 这个代理类对执行的方法不做任何保护
+ */
+public class PubInvocationHandler implements InvocationHandler {
+
+    private IPersonBean person;
+
+    public PubInvocationHandler(IPersonBean person) {
+        this.person = person;
+    }
+
+
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        try {
+            method.invoke(person, args);
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+}
+
+```
+### 创建动态代理
+使用JDK中的`Proxy.newInstance()`创建一样的代理对象
+```
+**
+     * 创建保护的动态代理
+     *
+     * @param protectPerson
+     */
+    private static IPersonBean getProtectProxy(IPersonBean protectPerson) {
+        return (IPersonBean) Proxy.newProxyInstance(protectPerson.getClass().getClassLoader()
+                , protectPerson.getClass().getInterfaces(), new ProtectInvocationHandler(protectPerson));
+    }
+
+
+    /**
+     * 创建公共的动态代理
+     */
+    private static IPersonBean getPubProxy(IPersonBean pubPerson) {
+        return (IPersonBean) Proxy.newProxyInstance(pubPerson.getClass().getClassLoader()
+                , pubPerson.getClass().getInterfaces(), new PubInvocationHandler(pubPerson));
+    }
+```
+
+### 测试
+
+```
+
+/**
+ * Created by yangtianrui on 16-12-31.
+ */
+public class Main {
+
+    public static void main(String[] args) {
+        // 保护的代理对象
+        IPersonBean protectPerson = new PersonImpl();
+        IPersonBean protectProxy = getProtectProxy(protectPerson);
+
+        // 普通代理对象
+        IPersonBean pubPerson = new PersonImpl();
+        IPersonBean pubProxy = getPubProxy(pubPerson);
+
+
+        // 访问受保护的代理对象
+        protectProxy.setName("AAA");
+        protectProxy.setHotRating(100);
+        // yon don't have permission to invoke this method!!
+
+
+        // 访问普通代理对象
+        pubProxy.setName("BBB");
+        pubProxy.setHotRating(90);
+
+
+    }
+
+    /**
+     * 创建保护的动态代理
+     *
+     * @param protectPerson
+     */
+    private static IPersonBean getProtectProxy(IPersonBean protectPerson) {
+        return (IPersonBean) Proxy.newProxyInstance(protectPerson.getClass().getClassLoader()
+                , protectPerson.getClass().getInterfaces(), new ProtectInvocationHandler(protectPerson));
+    }
+
+
+    /**
+     * 创建公共的动态代理
+     */
+    private static IPersonBean getPubProxy(IPersonBean pubPerson) {
+        return (IPersonBean) Proxy.newProxyInstance(pubPerson.getClass().getClassLoader()
+                , pubPerson.getClass().getInterfaces(), new PubInvocationHandler(pubPerson));
+    }
+
+}
+
+```
+
+代码下载: https://github.com/yangtianrui95/Design-Patterns
