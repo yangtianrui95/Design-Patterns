@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="20a05076-1007-45ad-a0fa-bb3d13673b1e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/memento/CareTaker.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/memento/Main.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/memento/Memento.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/memento/Originator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/memento/black_box_menento/CareTaker.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/memento/black_box_menento/IMemento.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/memento/black_box_menento/Main.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/memento/black_box_menento/Originator.java" />
+    <list default="true" id="20a05076-1007-45ad-a0fa-bb3d13673b1e" name="Default" comment="备忘录模式的白盒和黑盒实现">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
@@ -95,11 +87,31 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="237">
-                <caret line="1206" column="33" selection-start-line="1206" selection-start-column="33" selection-end-line="1206" selection-end-column="33" />
+              <first_editor relative-caret-position="108">
+                <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitattributes" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitattributes">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="156">
+              <caret line="10" column="23" selection-start-line="6" selection-start-column="21" selection-end-line="10" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".project" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.project">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -166,7 +178,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/adapter/Main.java" />
         <option value="$PROJECT_DIR$/src/adapter/Main2.java" />
         <option value="$PROJECT_DIR$/src/facade/SubSystemA.java" />
         <option value="$PROJECT_DIR$/src/facade/SubSystemB.java" />
@@ -216,6 +227,7 @@
         <option value="$PROJECT_DIR$/src/memento/black_box_menento/Originator.java" />
         <option value="$PROJECT_DIR$/src/memento/black_box_menento/CareTaker.java" />
         <option value="$PROJECT_DIR$/src/memento/black_box_menento/Main.java" />
+        <option value="$PROJECT_DIR$/.gitattributes" />
         <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
@@ -907,7 +919,7 @@
       <workItem from="1483195824217" duration="4575000" />
       <workItem from="1483254017437" duration="1238000" />
       <workItem from="1489809404759" duration="4742000" />
-      <workItem from="1489822701251" duration="26000" />
+      <workItem from="1489822701251" duration="732000" />
     </task>
     <task id="LOCAL-00001" summary="代理模式">
       <created>1469457585561</created>
@@ -958,15 +970,22 @@
       <option name="project" value="LOCAL" />
       <updated>1483255200571</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="备忘录模式的白盒和黑盒实现">
+      <created>1489822787148</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1489822787148</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67896000" />
+    <option name="totallyTimeSpent" value="68602000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -975,8 +994,8 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32905295" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6944" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32905295" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6934189" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32744783" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20921451" sideWeight="0.4947994" order="0" side_tool="false" content_ui="combo" />
@@ -1038,6 +1057,7 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="代理模式" />
     <MESSAGE value="动态代理模式" />
     <MESSAGE value="装饰器模式示例2" />
@@ -1045,7 +1065,9 @@
     <MESSAGE value="桥接模式" />
     <MESSAGE value="职责链模式" />
     <MESSAGE value="基于InvocationHandler创建动态代理" />
-    <option name="LAST_COMMIT_MESSAGE" value="基于InvocationHandler创建动态代理" />
+    <MESSAGE value="备忘录模式的白盒和黑盒实现" />
+    <option name="LAST_COMMIT_MESSAGE" value="备忘录模式的白盒和黑盒实现" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1062,13 +1084,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///opt/java-oracle-1.8/jdk1.8.0_91/src.zip!/java/lang/Throwable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="499" column="30" selection-start-line="499" selection-start-column="30" selection-end-line="499" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///opt/java-oracle-1.8/jdk1.8.0_91/src.zip!/java/lang/CloneNotSupportedException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
@@ -1094,13 +1109,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitattributes">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1479,11 +1487,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitattributes">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="10" column="23" selection-start-line="6" selection-start-column="21" selection-end-line="10" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.project">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="237">
-            <caret line="1206" column="33" selection-start-line="1206" selection-start-column="33" selection-end-line="1206" selection-end-column="33" />
+          <first_editor relative-caret-position="108">
+            <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />

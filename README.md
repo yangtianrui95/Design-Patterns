@@ -1,6 +1,10 @@
 # Java--Design_Pattern
 常用的Java设计模式
 
+
+-----
+博客地址:http://blog.csdn.net/y874961524
+
 ## 1. 简单工厂模式
 
 
